@@ -1,4 +1,4 @@
-package logic;
+package logic.DAO;
 
 import entities.*;
 
@@ -13,12 +13,11 @@ public abstract class DAO {
     public abstract boolean checkAdmin(String login, String password);
     public abstract Client getClientData(String firstName, String lastName);
     public abstract ArrayList<CreditCard> getClientCards(int clientId);
-    public abstract BankAccount getAccount(int cardNumber);
+    public abstract BankAccount getClientAccounts(int cardNumber);
     public abstract void balanceOperation(int cardNumber, double sum, int receiverAccount);
     public abstract void changeBlockStatus(int accountId, boolean status);
     public abstract LinkedList<CardRequest> getRequests();
     public abstract LinkedList<Transaction> getHistory(int cardNumber);
     public abstract void addCardRequest(int clientId, TypeCard typeCard);
-    public abstract void approveRequest(int requestId);
-    public abstract void rejectRequest(int requestId);
+    public abstract void processRequest(int requestId, boolean decision);
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: KrotSV
@@ -25,17 +26,17 @@
     <c:forEach items="${sessionScope.requests}" var="request">
     <tr>
         <td><input type="radio" name="requestChoose" value="${request.requestId}"></td>
-        <td>${request.date}</td>
+        <td><fmt:formatDate value="${request.date}" dateStyle="short" /></td>
         <td>${request.clientId}</td>
         <td>${request.typeCard}</td>
         <td>${request.approval}</td>
     </tr>
 </c:forEach></table>
-    <p><button type="submit" formaction="/approveRequest">Approve</button>
-        <button type="submit" formaction="/rejectRequest">Reject</button>
+    <p><button type="submit" formaction="/processRequest" name="decision" value="approved">Approve</button>
+        <button type="submit" formaction="/processRequest" name="decision" value="rejected">Reject</button>
         <input type="hidden" name="login" value="${sessionScope.login}">
         <input type="hidden" name="password" value="${sessionScope.password}">
-        <button formaction="/sendAdminData">Back</button></p>
+        <button formaction="/sendAdminData" formmethod="post">Back</button></p>
 
 </form>
 </body>

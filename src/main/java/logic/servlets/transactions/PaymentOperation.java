@@ -1,9 +1,8 @@
 package logic.servlets.transactions;
 
 import entities.BankAccount;
-import logic.DAO;
-import logic.DAODispatcher;
-import logic.servlets.cardrequests.RejectRequest;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -23,9 +22,9 @@ public class PaymentOperation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
             DAO dao = DAODispatcher.getDAO();
-            BankAccount account = dao.getAccount(Integer.parseInt(request.getParameter("cardNumber")));
+            BankAccount account = dao.getClientAccounts(Integer.parseInt(request.getParameter("cardNumber")));
             if(account.getStatus())
-                request.getRequestDispatcher("WEB-INF/deadends/cardIsBlocked.jsp").forward(request,response);
+                request.getRequestDispatcher("WEB-INF/deadends/cardNotAvalible.jsp").forward(request,response);
             else {
                 logger.info("Operation failed: not enough money. Card № " + request.getParameter("cardNumber"));
                 if (account.getBalance() - Double.parseDouble(request.getParameter("sum")) < account.getLimit()) {

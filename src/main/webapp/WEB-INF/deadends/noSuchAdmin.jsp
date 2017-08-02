@@ -14,6 +14,7 @@
 <h3>Sorry, but this account does not exist.</h3>
 <h3>Verify that you put correct data</h3>
 <form>
-    <button formaction="/goToAdminLoginPage">Back</button>
+    <button formaction="/goToAdminLoginPage" formmethod="post">Back</button>
+</form>
 </body>
 </html>

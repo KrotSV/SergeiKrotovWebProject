@@ -12,12 +12,12 @@
 </head>
 <body>
 <form action="/addBalance">
-    <p>Card number: ${sessionScope.cardChoose}; balance: ${sessionScope.account.balance}</p>
+    <p>Card number: ${sessionScope.cardNumber}; balance: ${sessionScope.account.balance}</p>
     <p>Please, enter sum: <input type="text" name="sum" pattern="^[0-9]+(\\.[0-9]+)?$"/></p>
-    <input type="hidden" name="cardNumber" value="${cardNumber}">
+    <input type="hidden" name="cardNumber" value="${sessionScope.cardNumber}">
     <p><input type="submit" value="Add" pattern="^[0-9]+(\\.[0-9]+)?$"/>
-        <input type="hidden" name="firstName" value="${sessionScope.firstName}">
-        <input type="hidden" name="lastName" value="${sessionScope.lastName}">
+        <input type="hidden" name="firstName" value="${sessionScope.client.firstName}">
+        <input type="hidden" name="lastName" value="${sessionScope.client.lastName}">
         <button formaction="/sendClientData">Back</button>
     </p>
 </form>

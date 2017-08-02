@@ -16,11 +16,11 @@
     <p><input type="radio" name="typeChose" value="CREDIT" checked> Credit
     <input type="radio" name="typeChose" value="DEBET" > Debet </p>
     <p>
-        <input type="hidden" name="firstName" value="${sessionScope.firstName}">
-        <input type="hidden" name="lastName" value="${sessionScope.lastName}">
-        <input type="hidden" name="clientId" value="${sessionScope.clientId}">
+        <input type="hidden" name="firstName" value="${sessionScope.client.firstName}">
+        <input type="hidden" name="lastName" value="${sessionScope.client.lastName}">
+        <input type="hidden" name="clientId" value="${sessionScope.client.clientId}">
         <button formaction="/sendRequestData">Request</button>
-        <button formaction="/sendClientData">Back</button>
+        <button formaction="/sendClientData" formmethod="post">Back</button>
     </p>
 </form>
 </body>

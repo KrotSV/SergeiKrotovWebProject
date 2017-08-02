@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>Please enter your login and password</h1>
-<form action="/sendAdminData" method="get">
+<form action="/sendAdminData" method="post">
     <p>login:    <input type="text" name="login"/></p>
     <p>Password: <input type="text" name="password"/></p>
     <p><input type="submit" value="Login"/>   <button type="submit" formaction="/start">Exit</button></p>

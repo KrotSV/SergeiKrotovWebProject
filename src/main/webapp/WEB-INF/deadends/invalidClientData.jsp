@@ -16,7 +16,7 @@
 <form>
     <input type="hidden" name="login" value="${sessionScope.login}">
     <input type="hidden" name="password" value="${sessionScope.password}">
-    <button formaction="/sendAdminData">Back</button>
+    <button formaction="/sendAdminData" formmethod="post">Back</button>
 </form>
 </body>
 </html>

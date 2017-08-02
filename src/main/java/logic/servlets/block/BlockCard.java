@@ -1,7 +1,7 @@
 package logic.servlets.block;
 
-import logic.DAO;
-import logic.DAODispatcher;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -23,10 +23,10 @@ public class BlockCard extends HttpServlet {
         try {
             dao.changeBlockStatus(Integer.parseInt(request.getParameter("cardChoose")), true);
             logger.info("Card № " + request.getParameter("cardChoose") + " is blocked");
-            request.getRequestDispatcher("WEB-INF/deadends/block.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/blockComplete.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){
-            request.getRequestDispatcher("WEB-INF/deadends/cardNotChoosen.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/cardNotSelected.jsp").forward(request, response);
         }
     }
 }

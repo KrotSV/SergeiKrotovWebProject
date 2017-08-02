@@ -1,7 +1,7 @@
 package logic.servlets.transactions;
 
-import logic.DAO;
-import logic.DAODispatcher;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,11 +21,11 @@ public class gotoPaymentForm extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
-            request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
-            request.getRequestDispatcher("WEB-INF/forms/payment.jsp").forward(request, response);
+            request.getSession().setAttribute("balance", dao.getClientAccounts(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
+            request.getRequestDispatcher("WEB-INF/forms/paymentOperation.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){
-            request.getRequestDispatcher("WEB-INF/deadends/cardNotChoosen.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/cardNotSelected.jsp").forward(request, response);
         }
     }
 }

@@ -3,8 +3,8 @@ package logic.servlets.show;
 import entities.BankAccount;
 import entities.Client;
 import entities.CreditCard;
-import logic.DAO;
-import logic.DAODispatcher;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "ShowBankAccounts", urlPatterns = "/sendClientDataByAdmin")
-public class ShowBankAccounts extends HttpServlet {
+@WebServlet(name = "ShowClientAccounts", urlPatterns = "/sendClientDataByAdmin")
+public class ShowClientAccounts extends HttpServlet {
     private DAO dao = DAODispatcher.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -32,7 +32,7 @@ public class ShowBankAccounts extends HttpServlet {
 
 
                 for (CreditCard c : cards) {
-                    accounts.add(dao.getAccount(c.getCardNumber()));
+                    accounts.add(dao.getClientAccounts(c.getCardNumber()));
                 }
                 request.getSession().setAttribute("accounts", accounts);
                 request.getSession().setAttribute("client", client);
@@ -41,11 +41,11 @@ public class ShowBankAccounts extends HttpServlet {
 
                 request.getRequestDispatcher("WEB-INF/forms/clientAccounts.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("WEB-INF/deadends/noSuchClient.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/deadends/invalidClientData.jsp").forward(request, response);
             }
         }
         catch (Exception ex){
-            request.getRequestDispatcher("WEB-INF/deadends/noSuchClient.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/invalidClientData.jsp").forward(request, response);
         }
     }
 

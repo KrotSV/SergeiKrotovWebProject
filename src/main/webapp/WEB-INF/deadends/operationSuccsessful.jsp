@@ -13,9 +13,9 @@
 <body>
 <form>
     <h3>Operation succsessful</h3>
-    <input type="hidden" name="firstName" value="${firstName}">
-    <input type="hidden" name="lastName" value="${lastName}">
-    <button formaction="/sendClientData">Back</button>
+    <input type="hidden" name="firstName" value="${sessionScope.client.firstName}">
+    <input type="hidden" name="lastName" value="${sessionScope.client.lastName}">
+    <button formaction="/sendClientData" formmethod="post">Back</button>
 </form>
 </body>
 </html>

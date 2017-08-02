@@ -1,7 +1,6 @@
-package logic;
+package logic.DAO;
 
 import entities.*;
-import logic.servlets.transactions.PaymentOperation;
 import org.apache.log4j.Logger;
 
 
@@ -31,34 +30,6 @@ public class DAOmysql extends DAO {
     private DataSource getDataSource(){
         return this.dataSource;
     }
-
-//    public int testDB() {
-//        int out = 0;
-//        try (Connection conn = this.getDataSource().getConnection()) {
-//            PreparedStatement ps = conn.prepareStatement("SELECT * FROM clients WHERE clientId=? AND firstName=?");
-//            ps.setInt(1, 2);
-//            ps.setString(2, "Ivan");
-//
-//            ResultSet resultSet = ps.executeQuery();
-//            System.out.println("print result");
-//            out = resultSet.getRow();
-//            ResultSetMetaData meta = resultSet.getMetaData();
-//            System.out.println("Strings: " + meta.getColumnCount());
-//            System.out.println("2nd column: " + meta.getColumnName(2));
-//            if (!resultSet.isBeforeFirst()) {
-//                System.out.println("No data");
-//            }
-//            while (resultSet.next()) {
-//                System.out.println("Номер в выборке #" + resultSet.getRow()
-//                        + "\t Номер в базе #" + resultSet.getInt("clientId")
-//                        + "\t" + resultSet.getString("firstName"));
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return out;
-//    }
 
 
     @Override
@@ -140,7 +111,7 @@ public class DAOmysql extends DAO {
     }
 
     @Override
-    public BankAccount getAccount(int cardNumber) {
+    public BankAccount getClientAccounts(int cardNumber) {
         BankAccount account = new BankAccount();
         PreparedStatement ps = null;
         try (Connection conn = this.getDataSource().getConnection()) {
@@ -311,10 +282,10 @@ public class DAOmysql extends DAO {
     }
 
     @Override
-    public void approveRequest(int requestId) {
+    public void processRequest(int requestId, boolean decision) {
         try (Connection conn = this.getDataSource().getConnection();
         PreparedStatement ps = conn.prepareStatement("UPDATE cardrequests SET approval = ? WHERE requestId = ?")) {
-            ps.setBoolean(1, true);
+            ps.setBoolean(1, decision);
             ps.setInt(2, requestId);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -322,18 +293,6 @@ public class DAOmysql extends DAO {
         }
     }
 
-
-    @Override
-    public void rejectRequest(int requestId) {
-        try (Connection conn = this.getDataSource().getConnection();
-        PreparedStatement ps = conn.prepareStatement("UPDATE cardrequests SET approval=? WHERE requestId=?")) {
-            ps.setInt(1, 0);
-            ps.setInt(2, requestId);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            logger.error("SQL error " + e);
-        }
-    }
 
 
 }

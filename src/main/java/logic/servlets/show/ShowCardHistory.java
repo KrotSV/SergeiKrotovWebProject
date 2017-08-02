@@ -1,8 +1,8 @@
 package logic.servlets.show;
 
 import entities.Transaction;
-import logic.DAO;
-import logic.DAODispatcher;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,12 +31,12 @@ public class ShowCardHistory extends HttpServlet {
 //            request.getSession().setAttribute("dates", dates);
 //            System.out.println(dates);
             request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
-            request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
+            request.getSession().setAttribute("balance", dao.getClientAccounts(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
             request.getSession().setAttribute("history", history);
             request.getRequestDispatcher("WEB-INF/infopages/cardHistory.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){
-            request.getRequestDispatcher("WEB-INF/deadends/cardNotChoose.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/cardNotSelected.jsp").forward(request, response);
         }
 
     }

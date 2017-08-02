@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: krotsv
@@ -21,19 +21,17 @@
     <td><b>Sum</b></td>
 </tr>
 <c:forEach items="${sessionScope.history}" var="transaction">
-    <%--<c:set> var="date" value="${transaction.date}" scope="page"</c:set>--%>
     <tr>
-    <td>${transaction.date}</td>
-    <%--<td><fmt:formatDate value="${date}" dateStyle="MEDIUM"/></td>--%>
+    <td><fmt:formatDate value="${transaction.date}" dateStyle="short"/> </td>
     <td>${transaction.sum}</td>
     </tr>
 
 </c:forEach></table>
 <form>
     <p>
-    <input type="hidden" name="firstName" value="${sessionScope.firstName}">
-    <input type="hidden" name="lastName" value="${sessionScope.lastName}">
-        <button formaction="/sendClientData">Back</button>
+    <input type="hidden" name="firstName" value="${sessionScope.client.firstName}">
+    <input type="hidden" name="lastName" value="${sessionScope.client.lastName}">
+        <button formaction="/sendClientData" formmethod="post">Back</button>
     </p>
 </form>
 </body>

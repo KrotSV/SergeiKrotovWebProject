@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: KrotSV
@@ -13,8 +14,8 @@
 </head>
 <body>
 <h3>Personal account</h3>
-<p>${client.firstName} ${client.lastName}</p>
-<p>${birthday}</p>
+<p>${sessionScope.client.firstName} ${client.lastName}</p>
+<p>Birthday: <fmt:formatDate value="${client.birthday}" dateStyle="short" /></p>
 <%--<p>${client.birthday}</p>--%>
 <form>
 <table border="1">
@@ -27,14 +28,14 @@
         <td><b>Limit</b></td>
         <td><b>isBlocked</b></td>
     </tr>
-    <c:forEach items="${cards}" var="card" varStatus="loop">
+    <c:forEach items="${sessionScope.cards}" var="card" varStatus="loop">
     <tr>
         <td><input type="radio" name="cardChoose" value="${card.cardNumber}"></td>
         <td>${card.cardNumber}</td>
-        <td>${accounts[loop.index].balance}</td>
+        <td>${sessionScope.accounts[loop.index].balance}</td>
         <td>${card.typeCard}</td>
-        <td>${accounts[loop.index].limit}</td>
-        <td>${accounts[loop.index].status}</td>
+        <td>${sessionScope.accounts[loop.index].limit}</td>
+        <td>${sessionScope.accounts[loop.index].status}</td>
     </tr>
 </c:forEach></table>
     <p><button type="submit" formaction="/payCard">Pay</button>

@@ -1,9 +1,8 @@
 package logic.servlets.transactions;
 
 import entities.BankAccount;
-import logic.DAO;
-import logic.DAODispatcher;
-import logic.servlets.login.AdminLogin;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -30,7 +29,7 @@ public class adjunctionOperation extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/deadends/operationSuccsessful.jsp").forward(request, response);
             }
             else
-                request.getRequestDispatcher("WEB-INF/deadends.cardIsBlocked.jsp").forward(request,response);
+                request.getRequestDispatcher("WEB-INF/deadends.cardNotAvalible.jsp").forward(request,response);
         } catch (NumberFormatException ex) {
             request.getRequestDispatcher("WEB-INF/deadends/notCorrectData.jsp").forward(request, response);
         }

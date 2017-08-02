@@ -10,10 +10,9 @@ import java.io.IOException;
 @WebServlet(name = "gotoAdminLogin", urlPatterns = "/goToAdminLoginPage")
 public class gotoAdminLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("WEB-INF/login/adminLoginPage.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/login/adminLoginPage.jsp").forward(request, response);
     }
 }

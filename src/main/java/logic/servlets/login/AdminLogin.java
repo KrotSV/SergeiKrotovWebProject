@@ -1,8 +1,7 @@
 package logic.servlets.login;
 
-import logic.DAO;
-import logic.DAODispatcher;
-import logic.servlets.cardrequests.RejectRequest;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -16,10 +15,6 @@ import java.io.IOException;
 public class AdminLogin extends HttpServlet {
     private static Logger logger = Logger.getLogger(AdminLogin.class);
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DAO dao = DAODispatcher.getDAO();
         if(dao.checkAdmin(request.getParameter("login"), request.getParameter("password"))) {
             request.getSession().setAttribute("login", request.getParameter("login"));
@@ -29,6 +24,11 @@ public class AdminLogin extends HttpServlet {
         }
         else
             request.getRequestDispatcher("WEB-INF/deadends/noSuchAdmin.jsp").forward(request, response);
+
+    }
+    
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

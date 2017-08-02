@@ -13,8 +13,7 @@
 </head>
 <body>
 <h3>Client accounts</h3>
-<p>${client.firstName} ${client.lastName}</p>
-<p>${birthday}</p>
+<p>${sessionScope.client.firstName} ${sessionScope.client.lastName}</p>
 <%--<p>${client.birthday}</p>--%>
 <form>
 <table border="1">
@@ -23,17 +22,17 @@
         <td><b>CardNumber</b></td>
         <td><b>isBlocked</b></td>
     </tr>
-    <c:forEach items="${accounts}" var="account" varStatus="loop">
+    <c:forEach items="${sessionScope.accounts}" var="account" varStatus="loop">
     <tr>
         <td><input type="radio" name="cardChoose" value="${cards[loop.index].cardNumber}"></td>
-        <td>${cards[loop.index].cardNumber}</td>
+        <td>${sessionScope.cards[loop.index].cardNumber}</td>
         <td>${account.status}</td>
     </tr>
 </c:forEach></table>
     <p><button type="submit" formaction="/changeCardStatus">Unblock</button>
-        <input type="hidden" name="login" value="${login}">
-        <input type="hidden" name="password" value="${password}">
-        <button formaction="/sendAdminData">Back</button></p>
+        <input type="hidden" name="login" value="${sessionScope.login}">
+        <input type="hidden" name="password" value="${sessionScope.password}">
+        <button formaction="/sendAdminData" formmethod="post">Back</button></p>
         <p><button type="submit" formaction="/start">Exit</button></p>
 </form>
 </body>
